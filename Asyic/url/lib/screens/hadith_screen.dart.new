@@ -1,0 +1,209 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:share_plus/share_plus.dart';
+import 'bukhari_hadiths_screen.dart';
+import 'muslim_hadiths_screen.dart';
+import '../models/hadith_model.dart';
+import '../services/hadith_service.dart';
+
+class HadithScreen extends StatefulWidget {
+  const HadithScreen({super.key});
+
+  @override
+  _HadithScreenState createState() => _HadithScreenState();
+}
+
+class _HadithScreenState extends State<HadithScreen>
+    with SingleTickerProviderStateMixin {
+  final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
+      GlobalKey<ScaffoldMessengerState>();
+
+  Map<String, List<Hadith>> _hadithCategories = {};
+  String _selectedCategory = 'الكل';
+  bool _isLoading = false;
+  String _errorMessage = '';
+  late AnimationController _colorAnimationController;
+  late Animation<Color?> _colorTween;
+
+  // List of major hadith collections
+  final List<Map<String, dynamic>> _hadithCollections = [
+    
+    {
+      'title': 'صحيح مسلم',
+      'description': 'ثاني أصح الكتب بعد صحيح البخاري',
+      'icon': Icons.book,
+      'color': Colors.blue,
+      'route': MuslimHadithsScreen.routeName,
+    },
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _colorAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    )..repeat(reverse: true);
+
+    _colorTween = ColorTween(
+      begin: const Color(0xFF1E88E5),
+      end: const Color(0xFF0D47A1),
+    ).animate(_colorAnimationController);
+
+    initializeDateFormatting();
+  }
+
+  @override
+  void dispose() {
+    _colorAnimationController.dispose();
+    _searchController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  // Show snackbar with message
+  void _showSnackBar(String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontFamily: 'UthmanicHafs'),
+      ),
+      duration: const Duration(seconds: 2),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _colorAnimationController,
+      builder: (context, child) {
+        return Scaffold(
+          key: _scaffoldKey,
+          appBar: AppBar(
+            title: const Text(
+              'الأحاديث النبوية',
+              style: TextStyle(fontFamily: 'UthmanicHafs'),
+            ),
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    _colorTween.value ?? const Color(0xFF1E88E5),
+                    _colorTween.value?.withOpacity(0.8) ??
+                        const Color(0xFF0D47A1),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          body: _buildHadithCollections(),
+        );
+      },
+    );
+  }
+
+  Widget _buildHadithCollections() {
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 0.9,
+      ),
+      itemCount: _hadithCollections.length,
+      itemBuilder: (context, index) {
+        final collection = _hadithCollections[index];
+        return _buildHadithCollectionCard(
+          context,
+          title: collection['title'],
+          description: collection['description'],
+          icon: collection['icon'],
+          color: collection['color'],
+          onTap: () {
+            Navigator.pushNamed(context, collection['route']);
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildHadithCollectionCard(
+    BuildContext context, {
+    required String title,
+    required String description,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(15),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                color.withOpacity(0.1),
+                color.withOpacity(0.3),
+              ],
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 48,
+                color: color,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                  fontFamily: 'UthmanicHafs',
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                description,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                  fontFamily: 'UthmanicHafs',
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

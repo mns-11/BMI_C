@@ -1,0 +1,19 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "كتاب بدء الوحي",
+      "hadithCount": 7
+    },
+    {
+      "id": "2",
+      "title": "كتاب الإيمان",
+      "hadithCount": 49
+    },
+    {
+      "id": "3",
+      "title": "كتاب العلم",
+      "hadithCount": 86
+    }
+  ]
+}

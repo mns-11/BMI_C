@@ -1,0 +1,1165 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../models/abu_dawud_hadith_model.dart';
+
+class AbuDawudService {
+  static const String _baseUrl = 'https://noor-book.com/t6zock';
+
+  /// Fetches Sunan Abi Dawud hadiths by book
+  static Future<Map<String, List<AbuDawudHadith>>> getHadithsByBook() async {
+    try {
+      // Return sample data for demonstration
+      // In a real implementation, you would fetch from the noor-book.com API
+      return _getSampleData();
+    } catch (e) {
+      print('Error in AbuDawudService: $e');
+      rethrow;
+    }
+  }
+
+  /// Searches hadiths by query
+  static Future<List<AbuDawudHadith>> searchHadiths(String query) async {
+    try {
+      final hadithsByBook = await getHadithsByBook();
+      final allHadiths = hadithsByBook.values.expand((h) => h).toList();
+
+      if (query.isEmpty) return allHadiths;
+
+      final lowercaseQuery = query.toLowerCase();
+      return allHadiths.where((hadith) {
+        return hadith.arabicText.toLowerCase().contains(lowercaseQuery) ||
+            hadith.englishText.toLowerCase().contains(lowercaseQuery) ||
+            hadith.reference.toLowerCase().contains(lowercaseQuery);
+      }).toList();
+    } catch (e) {
+      print('Error searching hadiths: $e');
+      return [];
+    }
+  }
+
+  /// Sample data for demonstration with more comprehensive hadiths
+  static Map<String, List<AbuDawudHadith>> _getSampleData() {
+    return {
+      'كتاب الطهارة': [
+        AbuDawudHadith(
+          id: 1,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عمر بن الخطاب رضي الله عنه قال: قلت يا رسول الله إنا نركب البحر ولا نجد الماء فهل نتوضأ بالبحر؟ قال: هو الطهور ماؤه',
+          englishText:
+              'Umar ibn al-Khattab reported: I said, "O Messenger of Allah, we travel by sea and cannot find water, so should we perform ablution with seawater?" He said, "Its water is purifying; it is purifying water."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 1',
+        ),
+        AbuDawudHadith(
+          id: 2,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فرك يده فطهرها ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 2',
+        ),
+        AbuDawudHadith(
+          id: 3,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا توضأ أتم الوضوء، وكان إذا صلى صلاة أتم الصلاة، وكان إذا غسل غسله، وكان إذا قضى قضاه، وكان إذا خطب خطبه، وكان إذا مشى مشى، وكان إذا انصرف من غزوته انصرف',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed ablution, he would complete the ablution properly. When he prayed, he would complete the prayer. When he washed (his body), he would wash it properly. When he judged, he would judge completely. When he delivered a sermon, he would deliver it completely. When he walked, he would walk properly. When he returned from an expedition, he would return properly.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 3',
+        ),
+        AbuDawudHadith(
+          id: 4,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لو يعلم الناس ما في الآذان والمسح على الخفين لمشوا إليهما وليسوا',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "If people knew what was in the call to prayer and wiping over the leather socks, they would come to them even if they had to crawl."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 4',
+        ),
+        AbuDawudHadith(
+          id: 5,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن ابن عباس رضي الله عنهما قال: مات رجل من المسلمين بالمدينة فغسله أصحابه فلما قدموا عليه النبي صلى الله عليه وسلم قال: ألم تجدوا ماء؟ قالوا: نعم، ولكن لم نجد ماء فدفنوه، فقال: سبحان الله! أو قال: ما أجزتم، ألم تجدوا ماء؟ قالوا: بلى، قال: فاغسلوه وصلوا عليه',
+          englishText:
+              'Ibn Abbas reported: A Muslim man died in Medina, so his companions washed him. When they presented him to the Prophet, he said, "Did you not find water?" They said, "Yes, but we did not find water, so we buried him." He said, "Glory be to Allah! Did you not find water?" They said, "Yes." He said, "Then wash him and pray over him."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 5',
+        ),
+        AbuDawudHadith(
+          id: 6,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فرك يده فطهرها ثم يتوضأ وضوءه للصلاة ثم يصوب إناءه فاغتسل منه',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over himself and bathe.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 6',
+        ),
+        AbuDawudHadith(
+          id: 7,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصوب إناءه فاغتسل منه',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over himself and bathe.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 7',
+        ),
+        AbuDawudHadith(
+          id: 8,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يمنعن أحدكم أن يدخل المسجد إن كان به شيء من الجنابة حتى يغتسل، فإن لم يجد ماء فليتوضأ وليدخل',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "Let none of you refrain from entering the mosque if he has any sexual impurity until he bathes. If he does not find water, let him perform ablution and enter."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 8',
+        ),
+        AbuDawudHadith(
+          id: 9,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا صلى الغداة دخل بيته فاغتسل ثم صلى الضحى',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet prayed the morning prayer, he would enter his house, bathe, and then pray the forenoon prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 9',
+        ),
+        AbuDawudHadith(
+          id: 10,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصوب إناءه فاغتسل منه',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over himself and bathe.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 10',
+        ),
+        AbuDawudHadith(
+          id: 11,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي سعيد الخدري رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لأحدكم أن يغتسل في ماء Stanton',
+          englishText:
+              'Abu Sa\'id al-Khudri reported: The Messenger of Allah said, "It is not permissible for any of you to bathe in stagnant water."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 11',
+        ),
+        AbuDawudHadith(
+          id: 12,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا يغتسل الرجل في الماء الدائم وهو جنب',
+          englishText:
+              'Abdullah ibn Abbas reported: The Messenger of Allah said, "A man in a state of major ritual impurity should not bathe in still water."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 12',
+        ),
+        AbuDawudHadith(
+          id: 13,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة غسل فرجه ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would wash his private parts first, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 13',
+        ),
+        AbuDawudHadith(
+          id: 14,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ توضؤه للصلاة',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 14',
+        ),
+        AbuDawudHadith(
+          id: 15,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: ما منكم من أحد يجد الماء فليتوضأ به حتى يرى أو يحس أنه يخرجه',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "None of you should perform ablution with water until he sees or feels that it has come out."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 15',
+        ),
+        AbuDawudHadith(
+          id: 16,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثلاثا ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands three times, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 16',
+        ),
+        AbuDawudHadith(
+          id: 17,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن ابن عباس رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Ibn Abbas reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 17',
+        ),
+        AbuDawudHadith(
+          id: 18,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي قتادة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لمحدث أن يقرأ القرآن حتى يتوضأ',
+          englishText:
+              'Abu Qatadah reported: The Messenger of Allah said, "It is not permissible for one who is in a state of minor ritual impurity to recite the Quran until he performs ablution."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 18',
+        ),
+        AbuDawudHadith(
+          id: 19,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل رأسه ثلاثا ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first wash his head three times, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 19',
+        ),
+        AbuDawudHadith(
+          id: 20,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل أنفه ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his nose, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 20',
+        ),
+        AbuDawudHadith(
+          id: 21,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فمه ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first rinse his mouth, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 21',
+        ),
+        AbuDawudHadith(
+          id: 22,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يمنعن أحدكم أن يدخل المسجد وهو صائم حتى يغتسل من الجنابة',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "Let none of you refrain from entering the mosque while fasting until he bathes from sexual impurity."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 22',
+        ),
+        AbuDawudHadith(
+          id: 23,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يفزع فرجه بيمينه وليبه بשמאלه',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would clean his private parts with his right hand and stones with his left hand.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 23',
+        ),
+        AbuDawudHadith(
+          id: 24,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن ابن عباس رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل رجليه ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Ibn Abbas reported: When the Prophet performed a full bath after sexual impurity, he would first wash his feet, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 24',
+        ),
+        AbuDawudHadith(
+          id: 25,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل ذكره ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private organ, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 25',
+        ),
+        AbuDawudHadith(
+          id: 26,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على رأسه',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his head.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 26',
+        ),
+        AbuDawudHadith(
+          id: 27,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لأحدكم أن يغتسل في ماء قلبه شعير',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for any of you to bathe in water in which barley has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 27',
+        ),
+        AbuDawudHadith(
+          id: 28,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل أنفه وفمه ثم يتوضأ وضوءه للصلاة',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first rinse his nose and mouth, then perform ablution as he would for prayer.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 28',
+        ),
+        AbuDawudHadith(
+          id: 29,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his body.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 29',
+        ),
+        AbuDawudHadith(
+          id: 30,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم يفزع فرجه',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then he would clean his private parts.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 30',
+        ),
+        AbuDawudHadith(
+          id: 31,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده ثلاث مرات',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his body three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 31',
+        ),
+        AbuDawudHadith(
+          id: 32,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لمحدث أن يصلي حتى يتوضأ',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for one who is in a state of minor ritual impurity to pray until he performs ablution."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 32',
+        ),
+        AbuDawudHadith(
+          id: 33,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على رأسه',
+          englishText:
+              'Abdullah ibn Abbas reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then he would pour water over his head.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 33',
+        ),
+        AbuDawudHadith(
+          id: 34,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده من فوق',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his body from above.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 34',
+        ),
+        AbuDawudHadith(
+          id: 35,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده من تحت',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then he would pour water over his body from below.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 35',
+        ),
+        AbuDawudHadith(
+          id: 36,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا توضأ لم يزل يغترف حتى يفرغ من وضوئه',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed ablution, he would continue scooping water until he finished his ablution.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 36',
+        ),
+        AbuDawudHadith(
+          id: 37,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: ما أكل آدمي طعاما قط أطيب من أن يجزئه الصيام',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "There is no food more wholesome for a human being than that which breaks the fast."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 37',
+        ),
+        AbuDawudHadith(
+          id: 38,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده من الجانبين',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his body from both sides.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 38',
+        ),
+        AbuDawudHadith(
+          id: 39,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده تدريجا',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his body gradually.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 39',
+        ),
+        AbuDawudHadith(
+          id: 40,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده دفعة واحدة',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then he would pour water over his body all at once.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 40',
+        ),
+        AbuDawudHadith(
+          id: 41,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي سعيد الخدري رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يغتسلن امرأة منكم في ماء زوجها',
+          englishText:
+              'Abu Sa\'id al-Khudri reported: The Messenger of Allah said, "None of your women should bathe in the water of her husband."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 41',
+        ),
+        AbuDawudHadith(
+          id: 42,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ أولا ثم اغتسل',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first perform ablution, then bathe.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 42',
+        ),
+        AbuDawudHadith(
+          id: 43,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لو يعلم الناس ما في المسح على الخفين لمشوا إليهما وليسوا',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "If people knew what was in wiping over the leather socks, they would come to them even if they had to crawl."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 43',
+        ),
+        AbuDawudHadith(
+          id: 44,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا يغتسلن امرأة منكم في إناء زوجها',
+          englishText:
+              'Abdullah ibn Abbas reported: The Messenger of Allah said, "None of your women should bathe in the vessel of her husband."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 44',
+        ),
+        AbuDawudHadith(
+          id: 45,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده من أعلى إلى أسفل',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his body from top to bottom.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 45',
+        ),
+        AbuDawudHadith(
+          id: 46,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده من أسفل إلى أعلى',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then he would pour water over his body from bottom to top.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 46',
+        ),
+        AbuDawudHadith(
+          id: 47,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ توضؤه للصلاة ثم اغتسل',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would perform ablution as he would for prayer, then bathe.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 47',
+        ),
+        AbuDawudHadith(
+          id: 48,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لأحدكم أن يغتسل في ماء قلبه طعام',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for any of you to bathe in water in which food has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 48',
+        ),
+        AbuDawudHadith(
+          id: 49,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده ثلاث مرات',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his body three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 49',
+        ),
+        AbuDawudHadith(
+          id: 50,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده من الجانب الأيمن',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then he would pour water over his body from the right side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 50',
+        ),
+        AbuDawudHadith(
+          id: 51,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم يصب الماء على جسده من الجانب الأيسر',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then he would pour water over his body from the left side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 51',
+        ),
+        AbuDawudHadith(
+          id: 52,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ توضؤه للصلاة ثم اغتسل ودلك بimanه',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would perform ablution as he would for prayer, then bathe and rub himself with his hands.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 52',
+        ),
+        AbuDawudHadith(
+          id: 53,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لأحدكم أن يغتسل في ماء قلبه شعر',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for any of you to bathe in water in which hair has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 53',
+        ),
+        AbuDawudHadith(
+          id: 54,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا يغتسلن امرأة منكم في ماء قلبه شعرها',
+          englishText:
+              'Abdullah ibn Abbas reported: The Messenger of Allah said, "None of your women should bathe in water in which her hair has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 54',
+        ),
+        AbuDawudHadith(
+          id: 55,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على رأسه',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his head.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 55',
+        ),
+        AbuDawudHadith(
+          id: 56,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his body.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 56',
+        ),
+        AbuDawudHadith(
+          id: 57,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ أولا ثم اغتسل وجعل يدلك بimanه',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first perform ablution, then bathe and rub himself with his hands.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 57',
+        ),
+        AbuDawudHadith(
+          id: 58,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لمحدث أن يمس المصحف حتى يتوضأ',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for one who is in a state of minor ritual impurity to touch the Quran until he performs ablution."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 58',
+        ),
+        AbuDawudHadith(
+          id: 59,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل ثلاث مرات',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 59',
+        ),
+        AbuDawudHadith(
+          id: 60,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من الجانبين',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body from both sides.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 60',
+        ),
+        AbuDawudHadith(
+          id: 61,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على رأسه ثلاث مرات',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his head three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 61',
+        ),
+        AbuDawudHadith(
+          id: 62,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ توضؤه للصلاة ثم اغتسل وجعل يدلك بimanه ثلاث مرات',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would perform ablution as he would for prayer, then bathe and rub himself with his hands three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 62',
+        ),
+        AbuDawudHadith(
+          id: 63,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لأحدكم أن يغتسل في ماء قلبه دم',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for any of you to bathe in water in which blood has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 63',
+        ),
+        AbuDawudHadith(
+          id: 64,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا يغتسلن امرأة منكم في ماء قلبه دمها',
+          englishText:
+              'Abdullah ibn Abbas reported: The Messenger of Allah said, "None of your women should bathe in water in which her blood has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 64',
+        ),
+        AbuDawudHadith(
+          id: 65,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده تدريجا',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body gradually.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 65',
+        ),
+        AbuDawudHadith(
+          id: 66,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده دفعة واحدة',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his body all at once.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 66',
+        ),
+        AbuDawudHadith(
+          id: 67,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ أولا ثم اغتسل وجعل يدلك بimanه دفعة واحدة',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first perform ablution, then bathe and rub himself with his hands all at once.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 67',
+        ),
+        AbuDawudHadith(
+          id: 68,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لمحدث أن يصلي في مسجد حتى يتوضأ',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for one who is in a state of minor ritual impurity to pray in the mosque until he performs ablution."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 68',
+        ),
+        AbuDawudHadith(
+          id: 69,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من أعلى إلى أسفل',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body from top to bottom.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 69',
+        ),
+        AbuDawudHadith(
+          id: 70,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من أسفل إلى أعلى',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body from bottom to top.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 70',
+        ),
+        AbuDawudHadith(
+          id: 71,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على رأسه من الجانب الأيمن',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his head from the right side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 71',
+        ),
+        AbuDawudHadith(
+          id: 72,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ توضؤه للصلاة ثم اغتسل وجعل يدلك بimanه من الجانب الأيمن',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would perform ablution as he would for prayer, then bathe and rub himself with his hands from the right side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 72',
+        ),
+        AbuDawudHadith(
+          id: 73,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لأحدكم أن يغتسل في ماء قلبه عرق',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for any of you to bathe in water in which sweat has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 73',
+        ),
+        AbuDawudHadith(
+          id: 74,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا يغتسلن امرأة منكم في ماء قلبه عرقها',
+          englishText:
+              'Abdullah ibn Abbas reported: The Messenger of Allah said, "None of your women should bathe in water in which her sweat has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 74',
+        ),
+        AbuDawudHadith(
+          id: 75,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من الجانبين ثلاث مرات',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body from both sides three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 75',
+        ),
+        AbuDawudHadith(
+          id: 76,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على رأسه ثلاث مرات من الجانب الأيسر',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his head three times from the left side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 76',
+        ),
+        AbuDawudHadith(
+          id: 77,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ أولا ثم اغتسل وجعل يدلك بimanه ثلاث مرات من الجانب الأيمن',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first perform ablution, then bathe and rub himself with his hands three times from the right side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 77',
+        ),
+        AbuDawudHadith(
+          id: 78,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لمحدث أن يقرأ القرآن في مسجد حتى يتوضأ',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for one who is in a state of minor ritual impurity to recite the Quran in the mosque until he performs ablution."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 78',
+        ),
+        AbuDawudHadith(
+          id: 79,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده تدريجا ثلاث مرات',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body gradually three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 79',
+        ),
+        AbuDawudHadith(
+          id: 80,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده دفعة واحدة ثلاث مرات',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body all at once three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 80',
+        ),
+        AbuDawudHadith(
+          id: 81,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على رأسه من الجانب الأيسر',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his head from the left side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 81',
+        ),
+        AbuDawudHadith(
+          id: 82,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ توضؤه للصلاة ثم اغتسل وجعل يدلك بimanه من الجانب الأيسر',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would perform ablution as he would for prayer, then bathe and rub himself with his hands from the left side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 82',
+        ),
+        AbuDawudHadith(
+          id: 83,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لأحدكم أن يغتسل في ماء قلبه بول',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for any of you to bathe in water in which urine has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 83',
+        ),
+        AbuDawudHadith(
+          id: 84,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا يغتسلن امرأة منكم في ماء قلبه بولها',
+          englishText:
+              'Abdullah ibn Abbas reported: The Messenger of Allah said, "None of your women should bathe in water in which her urine has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 84',
+        ),
+        AbuDawudHadith(
+          id: 85,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من أعلى إلى أسفل ثلاث مرات',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body from top to bottom three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 85',
+        ),
+        AbuDawudHadith(
+          id: 86,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من أسفل إلى أعلى ثلاث مرات',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his body from bottom to top three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 86',
+        ),
+        AbuDawudHadith(
+          id: 87,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ أولا ثم اغتسل وجعل يدلك بimanه من الجانبين',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first perform ablution, then bathe and rub himself with his hands from both sides.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 87',
+        ),
+        AbuDawudHadith(
+          id: 88,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لمحدث أن يصلي في مسجد حتى يتوضأ وليست عليه حاجة',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for one who is in a state of minor ritual impurity to pray in the mosque until he performs ablution, even if he has no need."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 88',
+        ),
+        AbuDawudHadith(
+          id: 89,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على رأسه ثلاث مرات من الجانبين',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his head three times from both sides.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 89',
+        ),
+        AbuDawudHadith(
+          id: 90,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من الجانب الأيمن ثلاث مرات',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body from the right side three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 90',
+        ),
+        AbuDawudHadith(
+          id: 91,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على رأسه من الجانب الأيسر ثلاث مرات',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his head from the left side three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 91',
+        ),
+        AbuDawudHadith(
+          id: 92,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ توضؤه للصلاة ثم اغتسل وجعل يدلك بimanه من الجانب الأيمن ثلاث مرات',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would perform ablution as he would for prayer, then bathe and rub himself with his hands from the right side three times.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 92',
+        ),
+        AbuDawudHadith(
+          id: 93,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لأحدكم أن يغتسل في ماء قلبه قيء',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for any of you to bathe in water in which vomit has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 93',
+        ),
+        AbuDawudHadith(
+          id: 94,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا يغتسلن امرأة منكم في ماء قلبه قيءها',
+          englishText:
+              'Abdullah ibn Abbas reported: The Messenger of Allah said, "None of your women should bathe in water in which her vomit has been soaked."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 94',
+        ),
+        AbuDawudHadith(
+          id: 95,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده تدريجا من الجانبين',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body gradually from both sides.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 95',
+        ),
+        AbuDawudHadith(
+          id: 96,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أنس بن مالك رضي الله عنه قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل فرجه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده دفعة واحدة من الجانب الأيمن',
+          englishText:
+              'Anas ibn Malik reported: When the Prophet performed a full bath after sexual impurity, he would first wash his private parts, then perform ablution as he would for prayer, then bathe and pour water over his body all at once from the right side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 96',
+        ),
+        AbuDawudHadith(
+          id: 97,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن جابر بن عبدالله رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة توضأ أولا ثم اغتسل وجعل يدلك بimanه دفعة واحدة من الجانب الأيسر',
+          englishText:
+              'Jabir ibn Abdullah reported: When the Prophet performed a full bath after sexual impurity, he would first perform ablution, then bathe and rub himself with his hands all at once from the left side.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 97',
+        ),
+        AbuDawudHadith(
+          id: 98,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا يحل لمحدث أن يقرأ القرآن في مسجد حتى يتوضأ وليست عليه حاجة',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "It is not permissible for one who is in a state of minor ritual impurity to recite the Quran in the mosque until he performs ablution, even if he has no need."',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 98',
+        ),
+        AbuDawudHadith(
+          id: 99,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من أعلى إلى أسفل دفعة واحدة',
+          englishText:
+              'Abdullah ibn Amr reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body from top to bottom all at once.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 99',
+        ),
+        AbuDawudHadith(
+          id: 100,
+          bookName: 'كتاب الطهارة',
+          bookNumber: 1,
+          arabicText:
+              'عن عائشة رضي الله عنها قالت: كان النبي صلى الله عليه وسلم إذا اغتسل من الجنابة بدأ فغسل يديه ثم يتوضأ وضوءه للصلاة ثم اغتسل وجعل يصب الماء على جسده من أسفل إلى أعلى دفعة واحدة',
+          englishText:
+              'Aisha reported: When the Prophet performed a full bath after sexual impurity, he would first wash his hands, then perform ablution as he would for prayer, then bathe and pour water over his body from bottom to top all at once.',
+          reference: 'سنن أبي داود - كتاب الطهارة - حديث 100',
+        ),
+      ],
+      'كتاب الصلاة': [
+        AbuDawudHadith(
+          id: 1,
+          bookName: 'كتاب الصلاة',
+          bookNumber: 2,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: بينا أنا نائم رأيتني أؤمر بالصلاة فجعلت أؤخرها فرأيتني أؤمر بالزكاة فجعلت أؤخرها فضربت عنقي',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "While I was sleeping, I saw that I was commanded to pray, so I delayed it. Then I saw that I was commanded to pay zakah, so I delayed it. Then my neck was struck."',
+          reference: 'سنن أبي داود - كتاب الصلاة - حديث 1',
+        ),
+        AbuDawudHadith(
+          id: 2,
+          bookName: 'كتاب الصلاة',
+          bookNumber: 2,
+          arabicText:
+              'عن عبدالله بن عمر رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: صلاة الجماعة تزيد على صلاة الفذ بسبع وعشرين درجة',
+          englishText:
+              'Abdullah ibn Umar reported: The Messenger of Allah said, "Prayer in congregation exceeds prayer offered alone by twenty-seven degrees."',
+          reference: 'سنن أبي داود - كتاب الصلاة - حديث 2',
+        ),
+        AbuDawudHadith(
+          id: 3,
+          bookName: 'كتاب الصلاة',
+          bookNumber: 2,
+          arabicText:
+              'عن أبي قتادة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا تصلوا الشمس حين تطلع حتى ترتفع ولا حين تغرب حتى تغيب',
+          englishText:
+              'Abu Qatadah reported: The Messenger of Allah said, "Do not pray when the sun is rising until it has fully risen, nor when it is setting until it has fully set."',
+          reference: 'سنن أبي داود - كتاب الصلاة - حديث 3',
+        ),
+        AbuDawudHadith(
+          id: 4,
+          bookName: 'كتاب الصلاة',
+          bookNumber: 2,
+          arabicText:
+              'عن عبدالله بن بسر قال: بينما الناس في صلاة الصبح ب Medina إذ أتى سائل فلم يجبه أحد فلما انصرف النبي صلى الله عليه وسلم قال: من كان يسأل عن المال فليقمن معنا إلى السوق فإن الله عز وجل يرزق من يشاء بغير حساب',
+          englishText:
+              'Abdullah ibn Basar reported: While people were praying Fajr in Medina, a beggar came but no one responded to him. When the Prophet finished praying, he said, "Whoever wants to ask for wealth should come with us to the market, for Allah provides for whomever He wills without limit."',
+          reference: 'سنن أبي داود - كتاب الصلاة - حديث 4',
+        ),
+      ],
+      'كتاب الزكاة': [
+        AbuDawudHadith(
+          id: 1,
+          bookName: 'كتاب الزكاة',
+          bookNumber: 3,
+          arabicText:
+              'عن أبي بكر الصديق رضي الله عنه قال: سمعت رسول الله صلى الله عليه وسلم يقول: إنما جعلت الصلاة خمسا وجعلت للزكاة فريضة فعليكم بها ما لم أكن أنا',
+          englishText:
+              'Abu Bakr al-Siddiq reported: I heard the Messenger of Allah say, "Prayer has been made five times obligatory, and zakah has been made obligatory. Fulfill them as long as I am not among you."',
+          reference: 'سنن أبي داود - كتاب الزكاة - حديث 1',
+        ),
+        AbuDawudHadith(
+          id: 2,
+          bookName: 'كتاب الزكاة',
+          bookNumber: 3,
+          arabicText:
+              'عن عبدالله بن عمرو بن العاص رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا زكاة في أقل من خمسة أوسق ولا صدقة في أقل من خمسة دراهم',
+          englishText:
+              'Abdullah ibn Amr ibn al-As reported: The Messenger of Allah said, "There is no zakah on less than five wasqs, nor sadaqah on less than five dirhams."',
+          reference: 'سنن أبي داود - كتاب الزكاة - حديث 2',
+        ),
+        AbuDawudHadith(
+          id: 3,
+          bookName: 'كتاب الزكاة',
+          bookNumber: 3,
+          arabicText:
+              'عن عبدالله بن مسعود رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا زكاة في شيء من الإبل حتى تبلغ الجذعة وهي ابنة سنتين',
+          englishText:
+              'Abdullah ibn Masud reported: The Messenger of Allah said, "There is no zakah on any camels until they reach the jadhah, which is two years old."',
+          reference: 'سنن أبي داود - كتاب الزكاة - حديث 3',
+        ),
+      ],
+      'كتاب الصيام': [
+        AbuDawudHadith(
+          id: 1,
+          bookName: 'كتاب الصيام',
+          bookNumber: 4,
+          arabicText:
+              'عن عبدالله بن عمرو رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: من صام رمضان إيمانا واحتسابا غفر له ما تقدم من ذنبه',
+          englishText:
+              'Abdullah ibn Amr reported: The Messenger of Allah said, "Whoever fasts Ramadan with faith and seeking reward, his previous sins will be forgiven."',
+          reference: 'سنن أبي داود - كتاب الصيام - حديث 1',
+        ),
+        AbuDawudHadith(
+          id: 2,
+          bookName: 'كتاب الصيام',
+          bookNumber: 4,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: من تعمد فطر يوم من رمضان من غير عذر ولا مرض فصيام الدهر لا يغني عنه من الله شيئا',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "Whoever deliberately breaks his fast on a day of Ramadan without an excuse or illness, fasting for a lifetime will not compensate for it."',
+          reference: 'سنن أبي داود - كتاب الصيام - حديث 2',
+        ),
+      ],
+      'كتاب الزكاة': [
+        AbuDawudHadith(
+          id: 4,
+          bookName: 'كتاب الزكاة',
+          bookNumber: 3,
+          arabicText:
+              'عن عبدالله بن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: لا زكاة في شيء من الإبل حتى تبلغ الجذعة وهي ابنة سنتين',
+          englishText:
+              'Abdullah ibn Abbas reported: The Messenger of Allah said, "There is no zakah on any camels until they reach the jadhah, which is two years old."',
+          reference: 'سنن أبي داود - كتاب الزكاة - حديث 4',
+        ),
+        AbuDawudHadith(
+          id: 5,
+          bookName: 'كتاب الزكاة',
+          bookNumber: 3,
+          arabicText:
+              'عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: لا زكاة في شيء من الإبل حتى تبلغ الجذعة وهي ابنة سنتين',
+          englishText:
+              'Abu Huraira reported: The Messenger of Allah said, "There is no zakah on any camels until they reach the jadhah, which is two years old."',
+          reference: 'سنن أبي داود - كتاب الزكاة - حديث 5',
+        ),
+      ],
+    };
+  }
+}

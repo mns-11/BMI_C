@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
+
+class DedicationScreen extends StatelessWidget {
+  const DedicationScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('إهداء'),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: AppTheme.appBarGradient),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'الحمد لله الذي بنعمته تتم الصالحات، والصلاة والسلام على رسول الله، وعلى آله وصحبه ومن والاه.',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Amiri',
+                    height: 1.6,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'أهدي ثواب هذا العمل المتواضع، الذي أسأل الله أن يجعله خالصاً لوجهه الكريم، ومكتبة علم نافع ينتفع بها المسلمون، إلى:',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Amiri',
+                    height: 1.6,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'أولاً: صدقة جارية',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Amiri',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'أسأل الله أن يتقبل هذا العمل وأن يجعله صدقة جارية عني وعن:\n'
+                  'والديَّ الكرام (حفظهما الله).\n'
+                  'أهلي وأسرتي جميعاً.\n'
+                  'إخواني وأخواتي.',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Amiri',
+                    height: 1.6,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'ثانياً: إهداء خاص لأرواح طاهرة',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Amiri',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'وإهداءً خاصاً لأرواح أحببناهم وفقدناهم، أسأل الله أن يجعل هذا العمل في ميزان حسناتهم، وأن يغفر لهم ويرحمهم ويوسع مدخلهم:\n'
+                  'روح الفقيدة الغالية: (رحمة سعيد باسلوم)\n'
+                  'روح الفقيد العزيز: عبيد عمر باربورد\n'
+                  'روح الفقيد العزيز: ابو بكر عبدالله باعثمان',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Amiri',
+                    height: 1.6,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'اللهم اغفر لهم وارحمهم وعافهم واعف عنهم، وأكرم نزلهم، ووسع مدخلهم، واجعل الفردوس الأعلى مثواهم.',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Amiri',
+                    height: 1.6,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'تقبل الله منا ومنكم صالح الأعمال.',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Amiri',
+                    height: 1.6,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

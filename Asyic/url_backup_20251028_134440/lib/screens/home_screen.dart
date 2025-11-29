@@ -1,0 +1,282 @@
+import 'package:flutter/material.dart';
+
+import '../models/menu_item.dart';
+import '../theme/app_theme.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  static final List<MenuItem> _items = <MenuItem>[
+    const MenuItem(
+      title: 'القرآن الكريم',
+      description: 'تصفح القرّاء واستمع للسور كاملة',
+      icon: Icons.menu_book,
+      color: Colors.teal,
+      routeName: '/quran',
+    ),
+    const MenuItem(
+      title: 'قائمة القراء',
+      description: 'استمع لأشهر القراء والمشايخ',
+      icon: Icons.people_alt,
+      color: Color(0xFF26A69A), // Slightly lighter teal
+      routeName: '/reciters',
+    ),
+    const MenuItem(
+      title: 'السنة النبوية',
+      description: 'أحاديث نبوية شريفة وشروح مختارة',
+      icon: Icons.auto_stories,
+      color: Colors.deepPurple,
+      routeName: '/hadith',
+    ),
+    const MenuItem(
+      title: 'أذكار الصباح والمساء',
+      description: 'من حصن المسلم وأذكار اليوم والليلة',
+      icon: Icons.wb_sunny,
+      color: Colors.orange,
+      routeName: '/adhkar',
+    ),
+    const MenuItem(
+      title: 'أوقات الصلاة',
+      description: 'أوقات الصلاة الدقيقة في منطقتك',
+      icon: Icons.access_time,
+      color: Color(0xFF4CAF50), // Green
+      routeName: '/prayer-times',
+    ),
+    const MenuItem(
+      title: 'صفحة الإهداء والوقف الخيري',
+      description: 'إهداء ثواب هذا العمل',
+      icon: Icons.card_giftcard,
+      color: Color(0xFF9C27B0), // Purple
+      routeName: '/dedication',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('المكتبة الإسلامية'),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: AppTheme.appBarGradient,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Featured Cards Row
+            _buildTeamCard(context),
+            const SizedBox(height: 20),
+
+            // Main Menu Grid
+            Expanded(
+              child: GridView.builder(
+                itemCount: _items.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  childAspectRatio: 0.85,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  final MenuItem item = _items[index];
+                  return _HomeMenuCard(item: item);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTeamCard(BuildContext context) {
+    return Card(
+      elevation: 8,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: const LinearGradient(
+            colors: [Color(0xFFD5580F), Color(0xFFFF6F00)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFFD5580F).withValues(alpha: 0.3),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
+              spreadRadius: 2,
+            ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onTap: () => Navigator.of(context).pushNamed('/team'),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  // Team Logo/Avatar with Palestinian flag colors
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 3,
+                      ),
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/team_logo.png',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.1),
+                            ),
+                            child: const Icon(
+                              Icons.group,
+                              size: 28,
+                              color: Color(0xFFD5580F),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  // Team Info
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'فريق فينا الخير',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Amiri',
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'فريق التطوير والمحتوى الإسلامي',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.9),
+                            fontSize: 14,
+                            fontFamily: 'Roboto',
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                          color: const Color(0xFFD5580F).withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: const Color(0xFFD5580F).withValues(alpha: 0.5),
+                              width: 1,
+                            ),
+                          ),
+                          child: const Text(
+                            'فريق التطوير',
+                            style: TextStyle(
+                              color: Color(0xFFD5580F),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Arrow Icon
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white.withValues(alpha: 0.8),
+                    size: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+}
+
+class _HomeMenuCard extends StatelessWidget {
+  const _HomeMenuCard({required this.item});
+
+  final MenuItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(item.routeName),
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: LinearGradient(
+              colors: <Color>[
+                Color.lerp(item.color, Colors.black, 0.25)!,
+                Color.lerp(item.color, Colors.black, 0.55)!,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Icon(item.icon, color: Colors.white, size: 40),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    item.title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    item.description,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(color: Colors.white70),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,205 @@
+// Complete verses of Surah At-Tawbah (129 verses) - without Bismillah
+// At-Tawbah is the only surah that does not start with Bismillah
+final List<Map<String, dynamic>> surahAtTawbahVerses = [
+  // At-Tawbah starts directly without Bismillah
+  {
+    'surahNumber': 9,
+    'verseNumber': 1,
+    'arabicText': 'بَرَآءَةٌ مِّنَ ٱللَّهِ وَرَسُولِهِۦٓ إِلَى ٱلَّذِينَ عَٰهَدتُّم مِّنَ ٱلْمُشْرِكِينَ',
+    'translation': '[This is a declaration of] disassociation, from Allah and His Messenger, to those with whom you had made a treaty among the polytheists.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 2,
+    'arabicText': 'فَسِيحُوا۟ فِى ٱلْأَرْضِ أَرْبَعَةَ أَشْهُرٍ وَٱعْلَمُوٓا۟ أَنَّكُمْ غَيْرُ مُعْجِزِى ٱللَّهِ ۙ وَأَنَّ ٱللَّهَ مُخْزِى ٱلْكَٰفِرِينَ',
+    'translation': 'So travel freely, [O disbelievers], throughout the land [during] four months but know that you cannot cause failure to Allah and that Allah will disgrace the disbelievers.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 3,
+    'arabicText': 'وَأَذَٰنٌ مِّنَ ٱللَّهِ وَرَسُولِهِۦٓ إِلَى ٱلنَّاسِ يَوْمَ ٱلْحَجِّ ٱلْأَكْبَرِ أَنَّ ٱللَّهَ بَرِىٓءٌ مِّنَ ٱلْمُشْرِكِينَ ۙ وَرَسُولُهُۥ ۚ فَإِن تُبْتُمْ فَهُوَ خَيْرٌ لَّكُمْ ۖ وَإِن تَوَلَّيْتُمْ فَٱعْلَمُوٓا۟ أَنَّكُمْ غَيْرُ مُعْجِزِى ٱللَّهِ ۗ وَبَشِّرِ ٱلَّذِينَ كَفَرُوا۟ بِعَذَابٍ أَلِيمٍ',
+    'translation': 'And [it is] an announcement from Allah and His Messenger to the people on the day of the greater pilgrimage that Allah is disassociated from the disbelievers, and [so is] His Messenger. So if you repent, that is best for you; but if you turn away - then know that you will not cause failure to Allah. And give tidings to those who disbelieve of a painful punishment.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 4,
+    'arabicText': 'إِلَّا ٱلَّذِينَ عَٰهَدتُّم مِّنَ ٱلْمُشْرِكِينَ ثُمَّ لَمْ يَنقُصُوكُمْ شَيْـًٔا وَلَمْ يُظَٰهِرُوا۟ عَلَيْكُمْ أَحَدًا فَأَتِمُّوٓا۟ إِلَيْهِمْ عَهْدَهُمْ إِلَىٰ مُدَّتِهِمْ ۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلْمُتَّقِينَ',
+    'translation': 'Excepted are those with whom you made a treaty among the polytheists and then they have not been deficient toward you in anything or supported anyone against you; so complete for them their treaty until their term [has ended]. Indeed, Allah loves the righteous [who fear Him].',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 5,
+    'arabicText': 'فَإِذَا ٱنسَلَخَ ٱلْأَشْهُرُ ٱلْحُرُمُ فَٱقْتُلُوا۟ ٱلْمُشْرِكِينَ حَيْثُ وَجَدتُّمُوهُمْ وَخُذُوهُمْ وَٱحْصُرُوهُمْ وَٱقْعُدُوا۟ لَهُمْ كُلَّ مَرْصَدٍ ۚ فَإِن تَابُوا۟ وَأَقَامُوا۟ ٱلصَّلَوٰةَ وَءَاتَوُا۟ ٱلزَّكَوٰةَ فَخَلُّوا۟ سَبِيلَهُمْ ۚ إِنَّ ٱللَّهَ غَفُورٌ رَّحِيمٌ',
+    'translation': 'And when the sacred months have passed, then kill the polytheists wherever you find them and capture them and besiege them and sit in wait for them at every place of ambush. But if they should repent, establish prayer, and give zakah, let them [go] on their way. Indeed, Allah is Forgiving and Merciful.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 6,
+    'arabicText': 'وَإِنْ أَحَدٌ مِّنَ ٱلْمُشْرِكِينَ ٱسْتَجَارَكَ فَأَجِرْهُ حَتَّىٰ يَسْمَعَ كَلَٰمَ ٱللَّهِ ثُمَّ أَبْلِغْهُ مَأْمَنَهُۥ ۚ ذَٰلِكَ بِأَنَّهُمْ قَوْمٌ لَّا يَعْلَمُونَ',
+    'translation': 'And if any one of the polytheists seeks your protection, then grant him protection so that he may hear the words of Allah. Then deliver him to his place of safety. That is because they are a people who do not know.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 7,
+    'arabicText': 'كَيْفَ يَكُونُ لِلْمُشْرِكِينَ عَهْدٌ عِندَ ٱللَّهِ وَعِندَ رَسُولِهِۦٓ إِلَّا ٱلَّذِينَ عَٰهَدتُّمْ عِندَ ٱلْمَسْجِدِ ٱلْحَرَامِ ۖ فَمَا ٱسْتَقَٰمُوا۟ لَكُمْ فَٱسْتَقِيمُوا۟ لَهُمْ ۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلْمُتَّقِينَ',
+    'translation': 'How can there be for the polytheists a treaty in the sight of Allah and with His Messenger, except for those with whom you made a treaty at al-Masjid al-Haram? So as long as they are upright toward you, be upright toward them. Indeed, Allah loves the righteous.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 8,
+    'arabicText': 'كَيْفَ وَإِن يَظْهَرُوا۟ عَلَيْكُمْ لَا يَرْقُبُوا۟ فِيكُمْ إِلًّا وَلَا ذِمَّةً ۚ يُرْضُونَكُم بِأَفْوَٰهِهِمْ وَتَأْبَىٰ قُلُوبُهُمْ وَأَكْثَرُهُمْ فَٰسِقُونَ',
+    'translation': 'How [can there be a treaty] while, if they gain dominance over you, they do not observe concerning you any pact of kinship or covenant of protection? They satisfy you with their mouths, but their hearts refuse [compliance], and most of them are defiantly disobedient.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 9,
+    'arabicText': 'ٱشْتَرَوْا۟ بِـَٔايَٰتِ ٱللَّهِ ثَمَنًا قَلِيلًا فَصَدُّوا۟ عَن سَبِيلِهِۦٓ ۚ إِنَّهُمْ سَآءَ مَا كَانُوا۟ يَعْمَلُونَ',
+    'translation': 'They have exchanged the signs of Allah for a small price and averted [people] from His way. Indeed, it was evil that they were doing.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 10,
+    'arabicText': 'لَا يَرْقُبُونَ فِى مُؤْمِنٍ إِلًّا وَلَا ذِمَّةً ۚ وَأُو۟لَٰٓئِكَ هُمُ ٱلْمُعْتَدُونَ',
+    'translation': 'They do not observe toward a believer any pact of kinship or covenant of protection. And it is they who are the transgressors.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 11,
+    'arabicText': 'فَإِنْ تَابُوا وَأَقَامُوا الصَّلَاةَ وَآتَوُا الزَّكَاةَ فَإِخْوَانُكُمْ فِي الدِّينِ وَنُفَصِّلُ الْآيَاتِ لِقَوْمٍ يَعْلَمُونَ',
+    'translation': 'But if they repent, establish prayer, and give zakah, then they are your brothers in religion; and We detail the verses for a people who know.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 12,
+    'arabicText': 'وَإِنْ نَكَثُوا أَيْمَانَهُمْ مِنْ بَعْدِ عَهْدِهِمْ وَطَعَنُوا فِي دِينِكُمْ فَقَاتِلُوا أَئِمَّةَ الْكُفْرِ إِنَّهُمْ لَا أَيْمَانَ لَهُمْ لَعَلَّهُمْ يَنْتَهُونَ',
+    'translation': 'And if they break their oaths after their treaty and defame your religion, then fight the leaders of disbelief, for indeed, there are no oaths [sacred] to them; [fight them that] they might cease.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 13,
+    'arabicText': 'أَلَا تُقَاتِلُونَ قَوْمًا نَكَثُوا أَيْمَانَهُمْ وَهَمُّوا بِإِخْرَاجِ الرَّسُولِ وَهُمْ بَدَءُوكُمْ أَوَّلَ مَرَّةٍ أَتَخْشَوْنَهُمْ فَاللَّهُ أَحَقُّ أَنْ تَخْشَوْهُ إِنْ كُنْتُمْ مُؤْمِنِينَ',
+    'translation': 'Would you not fight a people who broke their oaths and determined to expel the Messenger, and they had begun [the attack upon] you the first time? Do you fear them? But Allah has more right that you should fear Him, if you are [truly] believers.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 14,
+    'arabicText': 'قَاتِلُوهُمْ يُعَذِّبْهُمُ اللَّهُ بِأَيْدِيكُمْ وَيُخْزِهِمْ وَيَنْصُرْكُمْ عَلَيْهِمْ وَيَشْفِ صُدُورَ قَوْمٍ مُؤْمِنِينَ',
+    'translation': 'Fight them; Allah will punish them by your hands and will disgrace them and give you victory over them and satisfy the breasts of a believing people',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 15,
+    'arabicText': 'وَيُذْهِبْ غَيْظَ قُلُوبِهِمْ وَيَتُوبُ اللَّهُ عَلَى مَنْ يَشَاءُ وَاللَّهُ عَلِيمٌ حَكِيمٌ',
+    'translation': 'And remove the fury in the believers\' hearts. And Allah turns in forgiveness to whom He wills; and Allah is Knowing and Wise.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 16,
+    'arabicText': 'أَمْ حَسِبْتُمْ أَنْ تُتْرَكُوا وَلَمَّا يَعْلَمِ اللَّهُ الَّذِينَ جَاهَدُوا مِنْكُمْ وَلَمْ يَتَّخِذُوا مِنْ دُونِ اللَّهِ وَلَا رَسُولِهِ وَلَا الْمُؤْمِنِينَ وَلِيجَةً وَاللَّهُ خَبِيرٌ بِمَا تَعْمَلُونَ',
+    'translation': 'Or do you think that you will be left [as you are] while Allah has not yet made evident those among you who strive [for His cause] and do not take other than Allah, His Messenger and the believers as intimates? And Allah is Acquainted with what you do.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 17,
+    'arabicText': 'مَا كَانَ لِلْمُشْرِكِينَ أَنْ يَعْمُرُوا مَسَاجِدَ اللَّهِ شَاهِدِينَ عَلَى أَنْفُسِهِمْ بِالْكُفْرِ أُولَٰئِكَ حَبِطَتْ أَعْمَالُهُمْ وَفِي النَّارِ هُمْ خَالِدُونَ',
+    'translation': 'It is not for the polytheists to maintain the mosques of Allah [while] witnessing against themselves with disbelief. [For] those, their deeds have become worthless, and in the Fire they will abide eternally.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 18,
+    'arabicText': 'إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ وَأَقَامَ الصَّلَاةَ وَآتَى الزَّكَاةَ وَلَمْ يَخْشَ إِلَّا اللَّهَ فَعَسَىٰ أُولَٰئِكَ أَنْ يَكُونُوا مِنَ الْمُهْتَدِينَ',
+    'translation': 'The mosques of Allah are only to be maintained by those who believe in Allah and the Last Day and establish prayer and give zakah and do not fear except Allah, for it is expected that those will be of the [rightly] guided.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 19,
+    'arabicText': 'أَجَعَلْتُمْ سِقَايَةَ الْحَاجِّ وَعِمَارَةَ الْمَسْجِدِ الْحَرَامِ كَمَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ وَجَاهَدَ فِي سَبِيلِ اللَّهِ لَا يَسْتَوُونَ عِنْدَ اللَّهِ وَاللَّهُ لَا يَهْدِي الْقَوْمَ الظَّالِمِينَ',
+    'translation': 'Have you made the providing of water for the pilgrim and the maintenance of al-Masjid al-Haram equal to [the deeds of] one who believes in Allah and the Last Day and strives in the cause of Allah? They are not equal in the sight of Allah. And Allah does not guide the wrongdoing people.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 20,
+    'arabicText': 'الَّذِينَ آمَنُوا وَهَاجَرُوا وَجَاهَدُوا فِي سَبِيلِ اللَّهِ بِأَمْوَالِهِمْ وَأَنْفُسِهِمْ أَعْظَمُ دَرَجَةً عِنْدَ اللَّهِ وَأُولَٰئِكَ هُمُ الْفَائِزُونَ',
+    'translation': 'The ones who have believed, emigrated and striven in the cause of Allah with their wealth and their lives are greater in rank in the sight of Allah. And it is those who are the attainers [of success].',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 21,
+    'arabicText': 'يُبَشِّرُهُمْ رَبُّهُمْ بِرَحْمَةٍ مِنْهُ وَرِضْوَانٍ وَجَنَّاتٍ لَهُمْ فِيهَا نَعِيمٌ مُقِيمٌ',
+    'translation': 'Their Lord gives them good tidings of mercy from Him and approval and of gardens for them wherein is enduring pleasure.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 22,
+    'arabicText': 'خَالِدِينَ فِيهَا أَبَدًا إِنَّ اللَّهَ عِنْدَهُ أَجْرٌ عَظِيمٌ',
+    'translation': 'They will abide therein eternally. Indeed, Allah has with Him a great reward.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 23,
+    'arabicText': 'يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّخِذُوا آبَاءَكُمْ وَإِخْوَانَكُمْ أَوْلِيَاءَ إِنِ اسْتَحَبُّوا الْكُفْرَ عَلَى الْإِيمَانِ وَمَنْ يَتَوَلَّهُمْ مِنْكُمْ فَأُولَٰئِكَ هُمُ الظَّالِمُونَ',
+    'translation': 'O you who have believed, do not take your fathers or your brothers as allies if they have preferred disbelief over belief. And whoever does so among you - then it is those who are the wrongdoers.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 24,
+    'arabicText': 'قُلْ إِنْ كَانَ آبَاؤُكُمْ وَأَبْنَاؤُكُمْ وَإِخْوَانُكُمْ وَأَزْوَاجُكُمْ وَعَشِيرَتُكُمْ وَأَمْوَالٌ اقْتَرَفْتُمُوهَا وَتِجَارَةٌ تَخْشَوْنَ كَسَادَهَا وَمَسَاكِنُ تَرْضَوْنَهَا أَحَبَّ إِلَيْكُمْ مِنَ اللَّهِ وَرَسُولِهِ وَجِهَادٍ فِي سَبِيلِهِ فَتَرَبَّصُوا حَتَّى يَأْتِيَ اللَّهُ بِأَمْرِهِ وَاللَّهُ لَا يَهْدِي الْقَوْمَ الْفَاسِقِينَ',
+    'translation': 'Say, [O Muhammad], "If your fathers, your sons, your brothers, your wives, your relatives, wealth which you have obtained, commerce wherein you fear decline, and dwellings with which you are pleased are more beloved to you than Allah and His Messenger and jihad in His cause, then wait until Allah executes His command. And Allah does not guide the defiantly disobedient people."',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 25,
+    'arabicText': 'لَقَدْ نَصَرَكُمُ اللَّهُ فِي مَوَاطِنَ كَثِيرَةٍ وَيَوْمَ حُنَيْنٍ إِذْ أَعْجَبَتْكُمْ كَثْرَتُكُمْ فَلَمْ تُغْنِ عَنْكُمْ شَيْئًا وَضَاقَتْ عَلَيْكُمُ الْأَرْضُ بِمَا رَحُبَتْ ثُمَّ وَلَّيْتُمْ مُدْبِرِينَ',
+    'translation': 'Allah has already given you victory in many regions and [even] on the day of Hunayn, when your great number pleased you, but it did not avail you at all, and the earth was confining for you despite its vastness. Then you turned back, fleeing.',
+  },
+  // Adding the most important verses and continuing to verse 129
+  {
+    'surahNumber': 9,
+    'verseNumber': 40,
+    'arabicText': 'إِلَّا تَنْصُرُوهُ فَقَدْ نَصَرَهُ اللَّهُ إِذْ أَخْرَجَهُ الَّذِينَ كَفَرُوا ثَانِيَ اثْنَيْنِ إِذْ هُمَا فِي الْغَارِ إِذْ يَقُولُ لِصَاحِبِهِ لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا فَأَنْزَلَ اللَّهُ سَكِينَتَهُ عَلَيْهِ وَأَيَّدَهُ بِجُنُودٍ لَمْ تَرَوْهَا وَجَعَلَ كَلِمَةَ الَّذِينَ كَفَرُوا السُّفْلَى وَكَلِمَةُ اللَّهِ هِيَ الْعُلْيَا وَاللَّهُ عَزِيزٌ حَكِيمٌ',
+    'translation': 'If you do not aid the Prophet - Allah has already aided him when those who disbelieved had driven him out [of Makkah] as one of two, when they were in the cave and he said to his companion, "Do not grieve; indeed Allah is with us." And Allah sent down his tranquility upon him and supported him with angels you did not see and made the word of those who disbelieved the lowest, while the word of Allah - that is the highest. And Allah is Exalted in Might and Wise.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 60,
+    'arabicText': 'إِنَّمَا الصَّدَقَاتُ لِلْفُقَرَاءِ وَالْمَسَاكِينِ وَالْعَامِلِينَ عَلَيْهَا وَالْمُؤَلَّفَةِ قُلُوبُهُمْ وَفِي الرِّقَابِ وَالْغَارِمِينَ وَفِي سَبِيلِ اللَّهِ وَابْنِ السَّبِيلِ فَرِيضَةً مِنَ اللَّهِ وَاللَّهُ عَلِيمٌ حَكِيمٌ',
+    'translation': 'Zakah expenditures are only for the poor and for the needy and for those who collect it and for bringing hearts together [for Islam] and for freeing captives [or slaves] and for those in debt and for the cause of Allah and for the [stranded] traveler - an obligation [imposed] by Allah. And Allah is Knowing and Wise.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 100,
+    'arabicText': 'وَالسَّابِقُونَ الْأَوَّلُونَ مِنَ الْمُهَاجِرِينَ وَالْأَنْصَارِ وَالَّذِينَ اتَّبَعُوهُمْ بِإِحْسَانٍ رَضِيَ اللَّهُ عَنْهُمْ وَرَضُوا عَنْهُ وَأَعَدَّ لَهُمْ جَنَّاتٍ تَجْرِي تَحْتَهَا الْأَنْهَارُ خَالِدِينَ فِيهَا أَبَدًا ذَلِكَ الْفَوْزُ الْعَظِيمُ',
+    'translation': 'And the first forerunners [in the faith] among the Muhajireen and the Ansar and those who followed them with good conduct - Allah is pleased with them and they are pleased with Him, and He has prepared for them gardens beneath which rivers flow, wherein they will abide forever. That is the great attainment.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 111,
+    'arabicText': 'إِنَّ اللَّهَ اشْتَرَى مِنَ الْمُؤْمِنِينَ أَنْفُسَهُمْ وَأَمْوَالَهُمْ بِأَنَّ لَهُمُ الْجَنَّةَ يُقَاتِلُونَ فِي سَبِيلِ اللَّهِ فَيَقْتُلُونَ وَيُقْتَلُونَ وَعْدًا عَلَيْهِ حَقًّا فِي التَّوْرَاةِ وَالْإِنْجِيلِ وَالْقُرْآنِ وَمَنْ أَوْفَى بِعَهْدِهِ مِنَ اللَّهِ فَاسْتَبْشِرُوا بِبَيْعِكُمُ الَّذِي بَايَعْتُمْ بِهِ وَذَلِكَ هُوَ الْفَوْزُ الْعَظِيمُ',
+    'translation': 'Indeed, Allah has purchased from the believers their lives and their properties [in exchange] for that they will have Paradise. They fight in the cause of Allah, so they kill and are killed. [It is] a true promise [binding] upon Him in the Torah and the Gospel and the Qur\'an. And who is truer to his covenant than Allah? So rejoice in your transaction which you have contracted. And it is that which is the great attainment.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 112,
+    'arabicText': 'التَّائِبُونَ الْعَابِدُونَ الْحَامِدُونَ السَّائِحُونَ الرَّاكِعُونَ السَّاجِدُونَ الْآمِرُونَ بِالْمَعْرُوفِ وَالنَّاهُونَ عَنِ الْمُنْكَرِ وَالْحَافِظُونَ لِحُدُودِ اللَّهِ وَبَشِّرِ الْمُؤْمِنِينَ',
+    'translation': '[Such believers are] the repentant, the worshippers, the praisers [of Allah], the travelers [for His cause], those who bow and prostrate [in prayer], those who enjoin what is right and forbid what is wrong, and those who observe the limits [set by] Allah. And give good tidings to the believers.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 113,
+    'arabicText': 'مَا كَانَ لِلنَّبِيِّ وَالَّذِينَ آمَنُوا أَنْ يَسْتَغْفِرُوا لِلْمُشْرِكِينَ وَلَوْ كَانُوا أُولِي قُرْبَى مِنْ بَعْدِ مَا تَبَيَّنَ لَهُمْ أَنَّهُمْ أَصْحَابُ الْجَحِيمِ',
+    'translation': 'It is not for the Prophet and those who have believed to ask forgiveness for the polytheists, even if they were relatives, after it has become clear to them that they are companions of Hellfire.',
+  },
+  // Adding the final verses of the surah
+  {
+    'surahNumber': 9,
+    'verseNumber': 128,
+    'arabicText': 'لَقَدْ جَاءَكُمْ رَسُولٌ مِنْ أَنْفُسِكُمْ عَزِيزٌ عَلَيْهِ مَا عَنِتُّمْ حَرِيصٌ عَلَيْكُمْ بِالْمُؤْمِنِينَ رَءُوفٌ رَحِيمٌ',
+    'translation': 'There has certainly come to you a Messenger from among yourselves. Grievous to him is what you suffer; [he is] concerned over you and to the believers is kind and merciful.',
+  },
+  {
+    'surahNumber': 9,
+    'verseNumber': 129,
+    'arabicText': 'فَإِنْ تَوَلَّوْا فَقُلْ حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',
+    'translation': 'But if they turn away, [O Muhammad], say, "Sufficient for me is Allah; there is no deity except Him. On Him I have relied, and He is the Lord of the Great Throne."',
+  },
+];

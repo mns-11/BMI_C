@@ -1,0 +1,79 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Build outputs
+*.apk
+*.ipa
+*.aab
+*.so
+*.dylib
+
+# Temporary files
+*.tmp
+*.temp
+
+# Firebase
+firebase.json
+.firebase/
+firestore-debug.log
+firestore-requests.log
+
+# Local development
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Generated files
+android/app/src/main/res/mipmap-*/ic_launcher*.png
+ios/Runner/Assets.xcassets/AppIcon.appiconset/
+
+# Gradle
+.gradle/
+gradle-app.setting
+
+# Additional project files
+DEVELOPER_GUIDE.md
+README_AI_INTEGRATION.md
+README_INTEGRATION_STATUS.md
